@@ -73,15 +73,18 @@ namespace OOPExamples
 
             foreach (User user in users)
             {
-                var CountTransUAH = user.Transactions.Where(x => x.Currency == Currency.UAH).Count();
-                if (CountTransUAH > userMaxCountTransUAH.Transactions.Where(x => x.Currency == Currency.UAH).Count())
-                    userMaxCountTransUAH = user;
-                var CountTransEUR = user.Transactions.Where(x => x.Currency == Currency.EUR).Count();
-                if (CountTransEUR > userMaxCountTransEUR.Transactions.Where(x => x.Currency == Currency.EUR).Count())
-                    userMaxCountTransEUR = user;
-                var CountTransUSD = user.Transactions.Where(x => x.Currency == Currency.USD).Count();
-                if (CountTransUSD > userMaxCountTransUSD.Transactions.Where(x => x.Currency == Currency.USD).Count())
-                    userMaxCountTransUSD = user;
+                if (user.Type != UserType.Admin)
+                {
+                    var CountTransUAH = user.Transactions.Where(x => x.Currency == Currency.UAH).Count();
+                    if (CountTransUAH > userMaxCountTransUAH.Transactions.Where(x => x.Currency == Currency.UAH).Count())
+                        userMaxCountTransUAH = user;
+                    var CountTransEUR = user.Transactions.Where(x => x.Currency == Currency.EUR).Count();
+                    if (CountTransEUR > userMaxCountTransEUR.Transactions.Where(x => x.Currency == Currency.EUR).Count())
+                        userMaxCountTransEUR = user;
+                    var CountTransUSD = user.Transactions.Where(x => x.Currency == Currency.USD).Count();
+                    if (CountTransUSD > userMaxCountTransUSD.Transactions.Where(x => x.Currency == Currency.USD).Count())
+                        userMaxCountTransUSD = user;
+                }
             }
             Console.WriteLine($"User Max Count Trans UAH: {userMaxCountTransUAH.Id}) {userMaxCountTransUAH.FirstName} {userMaxCountTransUAH.LastName}");
             Console.WriteLine($"User Max Count Trans EUR: {userMaxCountTransEUR.Id}) {userMaxCountTransEUR.FirstName} {userMaxCountTransEUR.LastName}");
